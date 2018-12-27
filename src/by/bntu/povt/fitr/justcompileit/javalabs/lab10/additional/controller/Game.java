@@ -27,20 +27,19 @@ public class Game {
         while (run) {
             printer.showMenu(MENU_ITEMS, MENU_TITLE);
             int item = Choise.chooseMenuItem(MENU_ITEMS.length, printer, userInput);
-            GameLogic.setLimits(LVLS[item]);
-            GameLogic.gameInit();
+            GameLogic gameLogic = new GameLogic(LVLS[item]);
             printer.showMenu(METHODS, SUBMENU_TITLE);
             int method = Choise.chooseMenuItem(METHODS.length, printer, userInput);
-            GameLogic.showLimits(printer);
+            gameLogic.showLimits(printer);
             switch (method) {
                 case 0:
-                    GameLogic.PlayRandom(userInput, printer);
+                    gameLogic.PlayRandom(userInput, printer);
                     break;
                 case 1:
-                    GameLogic.PlayBinary(userInput, printer);
+                    gameLogic.PlayBinary(userInput, printer);
                     break;
             }
-            printer.print(FINAL_ATTEMPTS_1 + GameLogic.showAttempts() + FINAL_ATTEMPTS_2);
+            printer.print(FINAL_ATTEMPTS_1 + gameLogic.showAttempts() + FINAL_ATTEMPTS_2);
             run = Choise.exiting(EXITING_MESSAGE, printer, userInput);
         }
     }
