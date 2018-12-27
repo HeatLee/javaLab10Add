@@ -10,12 +10,15 @@ public class Game {
     public static final String[] METHODS = {"Random", "Binary"};
     public static final String SUBMENU_TITLE = "Choose methods that i should use: ";
     public static final String EXITING_MESSAGE = "Do you want to play more? (y/n)\n";
+    private static final String FINAL_ATTEMPTS_1 = "I used ";
+    private static final String FINAL_ATTEMPTS_2 = " attempts...\n";
     private static final int[] EASY = {0, 50};
     private static final int[] NORMAL = {0, 100};
     private static final int[] DIFFICULT = {20, 100};
     private static final int[] INSANE = {1000, 9999};
     private static final int[][] LVLS = {EASY, NORMAL, DIFFICULT, INSANE};
     private static final boolean DEFAULT_RUN = true;
+
     public static Printer printer = new Printer();
     public static UserInput userInput = new UserInput();
 
@@ -37,7 +40,7 @@ public class Game {
                     GameLogic.PlayBinary(userInput, printer);
                     break;
             }
-            printer.print("I used " + GameLogic.showAttempts() + " attempts...\n");
+            printer.print(FINAL_ATTEMPTS_1 + GameLogic.showAttempts() + FINAL_ATTEMPTS_2);
             run = Choise.exiting(EXITING_MESSAGE, printer, userInput);
         }
     }

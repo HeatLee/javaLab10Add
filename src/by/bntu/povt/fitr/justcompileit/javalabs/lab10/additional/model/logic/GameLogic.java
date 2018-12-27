@@ -8,6 +8,11 @@ public class GameLogic {
     private static int ATTEMPT = 0;
     private static int FIRST_LIMIT = 0;
     private static int SECOND_LIMIT = 0;
+    private static final String WRONG_TIP = "I can not understand such tip. Try again...";
+    private static final String GET_TIP_MSG = "< or > or = : ";
+    private static final char BIGGER = '>';
+    private static final char LOWER = '<';
+    private static final char EQUALS = '=';
     public static  Random random = new Random();
 
 
@@ -43,13 +48,13 @@ public class GameLogic {
             printer.print("My guess is " + guess + "\n");
             char tip = getTip(userInput, printer);
             switch (tip) {
-                case '<':
+                case LOWER:
                     SECOND_LIMIT = guess;
                     break;
-                case '>':
+                case BIGGER:
                     FIRST_LIMIT = guess;
                     break;
-                case '=':
+                case EQUALS:
                     printer.print("\nYour number is " + guess + "\n");
                     run = false;
                     break;
@@ -69,13 +74,13 @@ public class GameLogic {
             printer.print("My guess is " + guess + "\n");
             char tip = getTip(userInput, printer);
             switch (tip) {
-                case '<':
+                case LOWER:
                     SECOND_LIMIT = guess;
                     break;
-                case '>':
+                case BIGGER:
                     FIRST_LIMIT = guess;
                     break;
-                case '=':
+                case EQUALS:
                     printer.print("Your number is " + guess + "\n");
                     run = false;
                     break;
@@ -85,9 +90,9 @@ public class GameLogic {
     }
 
     private static char getTip(UserInput userInput, Printer printer) {
-        char tip = userInput.nextChar("< or > or = : ", printer);
-        if (tip != '<' && tip != '>' && tip != '=') {
-            printer.print("I can not understand such tip. Try again...");
+        char tip = userInput.nextChar(GET_TIP_MSG, printer);
+        if (tip != LOWER && tip != BIGGER && tip != EQUALS) {
+            printer.print(WRONG_TIP);
             return getTip(userInput, printer);
         }
         return tip;
